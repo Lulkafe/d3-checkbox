@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="d3CheckBox.js"></script>
+</head>
+<body>
+<div id="vis"></div>
+
+<script>
+    var svg = d3.select("#vis").append("svg").attr("width", 500).attr("height", 300),
+        checkBox1 = new d3CheckBox(),
+        checkBox2 = new d3CheckBox(),
+        checkBox3 = new d3CheckBox();
+
+    //Just for demonstration
+    var txt = svg.append("text").attr("x", 10).attr("y", 80).text("Click checkboxes"),
+        update = function () {
+            var checked1 = checkBox1.checked(),
+                checked2 = checkBox2.checked(),
+                checked3 = checkBox3.checked();
+            txt.text(checked1 + ", " + checked2 + ", " + checked3);
+        };
+
+    //Setting up each check box
+    checkBox1.size(40).x(10).y(10).markStrokeWidth(10).boxStrokeWidth(4).checked(true).clickEvent(update);
+    checkBox2.size(30).x(70).y(20).rx(5).ry(5).markStrokeWidth(3).boxStrokeWidth(4).checked(true).clickEvent(update);
+    checkBox3.x(120).y(30).checked(false).clickEvent(update);
+
+    svg.call(checkBox1);
+    svg.call(checkBox2);
+    svg.call(checkBox3);
+
+</script>
+</body>
+</html>
